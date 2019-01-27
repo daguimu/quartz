@@ -18,7 +18,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
-            <fileNamePattern>logs/lifeservice/info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/schedulare/info.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
@@ -32,7 +32,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
-            <fileNamePattern>logs/lifeservice/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/schedulare/error.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
