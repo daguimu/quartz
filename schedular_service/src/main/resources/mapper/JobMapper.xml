@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.schedular.mapper.JobMapper">
+  <resultMap id="jobMap" type="com.schedular.dto.JobDto">
+    <id property="id" column="id"/>
+    <result property="groupName" column="group_name"/>
+    <result property="isEnable" column="is_enable"/>
+    <result property="jobName" column="job_name"/>
+    <result property="params" column="params"/>
+    <result property="cornExpression" column="corn_expression"/>
+    <result property="description" column="description"/>
+  </resultMap>
+
+  <select id="getAllJobs" resultMap="jobMap">
+    select id,group_name,job_name,description,corn_expression,params from job where is_enable = 1;
+  </select>
+
+  <insert id="insertJob">
+    insert into job (group_name,job_name,description,is_enable,corn_expression,params) values (#{job.groupName},#{job.jobName},#{job.description},1,#{job.cornExpression},#{job.params})
+  </insert>
+</mapper>

@@ -9,10 +9,14 @@ import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-public class NewJob implements Job{
+public class BaseJob implements Job {
+
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        System.err.println("Hello!  NewJob is executing."+new Date() );
+        JobDetail jobDetail = context.getJobDetail();
+        System.err.println(
+            "Hello!  BaseJob is executing." + new Date() + "---->" + jobDetail.getJobDataMap()
+                .get("url"));
         /*
         //取得job详情
         JobDetail jobDetail = context.getJobDetail();

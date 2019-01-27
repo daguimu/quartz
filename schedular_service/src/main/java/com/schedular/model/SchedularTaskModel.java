@@ -1,5 +1,8 @@
 package com.schedular.model;
 
+import com.schedular.dto.JobDto;
+import lombok.Data;
+import org.quartz.Job;
 import org.quartz.JobDetail;
 import org.quartz.impl.triggers.CronTriggerImpl;
 
@@ -9,25 +12,29 @@ import java.util.List;
 import static org.quartz.JobBuilder.newJob;
 
 /**
- * Description:
- * Created by guimu on 2018/3/8 上午11:00
+ * Description: Created by guimu on 2018/3/8 上午11:00
  */
+@Data
 public class SchedularTaskModel {
+
+
     public static List<SchedularTaskModel> currentSchedularTaskModels = new ArrayList<>();
     private JobDetail jobDetail;
     private CronTriggerImpl cronTrigger;
 
-    public static SchedularTaskModel getTaskModel(Class jobClass, String description, String jobName, String cornExpression) {
+    public static SchedularTaskModel getTaskModel(Class<? extends Job> jobClass, JobDto jobDto) {
         JobDetail jobDetail = newJob(jobClass)
-                .withDescription(description)
-                .withIdentity(jobName, jobName + "jobGroup")
-                .storeDurably()
-                .build();
+            .withDescription(jobDto.getDescription())
+            .withIdentity(jobDto.getJobName(), jobDto.getGroupName())
+            .usingJobData("url", jobDto.getParams())
+            .storeDurably()
+            .build();
+
         CronTriggerImpl cronTrigger = new CronTriggerImpl();
-        cronTrigger.setName(jobName + "TriggerName");
-        cronTrigger.setGroup("TriggerGroupName");
+        cronTrigger.setName(jobDto.getJobName());
+        cronTrigger.setGroup(jobDto.getGroupName());
         try {
-            cronTrigger.setCronExpression(cornExpression);
+            cronTrigger.setCronExpression(jobDto.getCornExpression());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,25 +45,7 @@ public class SchedularTaskModel {
         return schedularTaskModel;
     }
 
+
     private SchedularTaskModel() {
-
     }
-
-    public JobDetail getJobDetail() {
-        return this.jobDetail;
-    }
-
-    public CronTriggerImpl getCronTrigger() {
-        return this.cronTrigger;
-    }
-
-    public void setJobDetail(JobDetail jobDetail) {
-        this.jobDetail = jobDetail;
-    }
-
-    public void setCronTrigger(CronTriggerImpl cronTrigger) {
-        this.cronTrigger = cronTrigger;
-    }
-
-
 }

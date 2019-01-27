@@ -1,0 +1,18 @@
+server:
+  port: 9807
+
+org:
+  quartz:
+    dataSource:
+      myDS:
+        URL: jdbc:mysql://127.0.0.1:3306/schedular?useUnicode=true&characterEncoding=utf8
+        driver: com.mysql.jdbc.Driver
+        maxConnections: 10
+        password: 123456
+        user: root
+quartz:
+  scheduler:
+    instanceName: schedular_service
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
