@@ -16,7 +16,8 @@ public class BaseJob implements Job {
         JobDetail jobDetail = context.getJobDetail();
         System.err.println(
             "Hello!  BaseJob is executing." + new Date() + "---->" + jobDetail.getJobDataMap()
-                .get("url"));
+                .get("url") + "groupName: " + jobDetail.getKey().getGroup() + "jobName:" + jobDetail
+                .getKey().getName());
         /*
         //取得job详情
         JobDetail jobDetail = context.getJobDetail();

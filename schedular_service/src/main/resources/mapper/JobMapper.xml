@@ -19,4 +19,7 @@
   <insert id="insertJob">
     insert into job (group_name,job_name,description,is_enable,corn_expression,params) values (#{job.groupName},#{job.jobName},#{job.description},1,#{job.cornExpression},#{job.params})
   </insert>
+  <update id="disable">
+  update job set is_enable = 0  where  group_name = #{groupName} and job_name = #{jobname}
+  </update>
 </mapper>

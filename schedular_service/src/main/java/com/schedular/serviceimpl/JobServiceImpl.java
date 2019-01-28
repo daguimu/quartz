@@ -27,11 +27,23 @@ public class JobServiceImpl implements JobService {
 
     /**
     *@Author: Guimu
-    *@Description: 将该job添加到数据库
-    *@Param: [jobDto]
-    *@Return: java.util.Optional<java.lang.Integer>
-    *@Date: 2019-01-27 16:01
+    *@Description: 禁用某job
+    *@Param: [groupName, jobName]
+    *@Return: java.util.Optional<java.lang.Boolean>
+    *@Date: 2019-01-28 09:47
     */
+    @Override
+    public Optional<Boolean> removeJob(String groupName, String jobName) {
+        return Optional.of(jobMapper.disable(groupName, jobName) > 0);
+    }
+
+    /**
+     * @Author: Guimu
+     * @Description: 将该job添加到数据库
+     * @Param: [jobDto]
+     * @Return: java.util.Optional<java.lang.Integer>
+     * @Date: 2019-01-27 16:01
+     */
     @Override
     public Optional<Integer> insertOneJob(JobDto jobDto) {
         return Optional.of(jobMapper.insertJob(jobDto));

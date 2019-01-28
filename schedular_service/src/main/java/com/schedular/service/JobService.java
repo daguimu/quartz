@@ -14,5 +14,7 @@ public interface JobService {
 
     Optional<List<JobDto>> getAllJobs();
 
+    Optional<Boolean> removeJob(String groupName, String jobName);
+
     Optional<Integer> insertOneJob(JobDto jobDto);
 }

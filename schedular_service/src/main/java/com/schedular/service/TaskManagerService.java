@@ -11,4 +11,6 @@ import com.schedular.dto.JobDto;
 public interface TaskManagerService {
 
     boolean addJob(JobDto jobDto);
+
+    boolean remove(String groupName, String jobName);
 }
